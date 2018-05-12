@@ -9,7 +9,7 @@ let defaultStyle ={
 class Aggregate extends Component {
   render(){
     return(
-      <div style={{ width: "40%", display:'inline-block'}}>
+      <div style={{ ...defaultStyle,width: "40%", display:'inline-block'}}>
         <h2> Number Text </h2>
       </div>
     );
@@ -19,7 +19,7 @@ class Aggregate extends Component {
 class Filter extends Component {
   render(){
     return(
-      <div style={{defaultStyle}}>
+      <div style={{...defaultStyle}}>
         <img/>
         <input type="text" />
           Filter
@@ -31,7 +31,7 @@ class Filter extends Component {
 class PlayList extends Component{
   render(){
     return(
-      <div style={{defaultStyle,display:'inline-block', width: "25%"}}>
+      <div style={{...defaultStyle,display:'inline-block', width: "25%"}}>
         <img/>
         <h3>PlayList Name </h3>
           <ul><li>Song 1</li><li>Song 2</li><li>Song 3</li></ul>
