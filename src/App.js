@@ -4,7 +4,47 @@ import './App.css';
 let defaultTextColor = '#fff';
 let defaultStyle ={
   color: defaultTextColor
-}
+};
+let fakeServerData = {
+  user: {
+    name: 'David',
+    playlists: [
+      {
+        name: 'My favorites',
+        songs: [
+          {name: 'Beat It', duration: 1345}, 
+          {name: 'Cannelloni Makaroni', duration: 1236},
+          {name: 'Rosa helikopter', duration: 70000}
+        ]
+      },
+      {
+        name: 'Discover Weekly',
+        songs: [
+          {name: 'Beat It', duration: 1345}, 
+          {name: 'Cannelloni Makaroni', duration: 1236},
+          {name: 'Rosa helikopter', duration: 70000}
+        ]
+      },
+      {
+        name: 'Another playlist - the best!',
+        songs: [
+          {name: 'Beat It', duration: 1345}, 
+          {name: 'Cannelloni Makaroni', duration: 1236},
+          {name: 'Rosa helikopter', duration: 70000}
+        ]
+      },
+      {
+        name: 'Playlist - yeah!',
+        songs: [
+          {name: 'Beat It', duration: 1345}, 
+          {name: 'Cannelloni Makaroni', duration: 1236},
+          {name: 'Rosa helikopter', duration: 70000}
+        ]
+      }
+    ]
+  }
+};
+
 
 class Aggregate extends Component {
   render(){
@@ -42,17 +82,35 @@ class PlayList extends Component{
 
 
 class App extends Component {
-  render() {
+  constructor(){
+    super();
+    this.state = {serverData: {}}
+  }
+  componentDidMount(){
+    setTimeout( () =>
+    {
+      this.setState({serverData: fakeServerData});
+    },1000)
+  }
+    
+render() {
     return (
       <div className="App">
-        <h1>Title</h1>
-        <Aggregate/>
-        <Aggregate/>
-        <Filter/>
-        <PlayList/>
-        <PlayList/>
-        <PlayList/>
-        <PlayList/>
+        {this.state.serverData.user ? 
+        <div>
+          <h1 style= {{...defaultStyle, 'font-size': '54px'}}>
+            {this.state.serverData.user && 
+              this.state.serverData.user.name}'s PlayList
+          </h1> 
+          <Aggregate playlists/>
+          <Aggregate/>
+          <Filter/>
+          <PlayList/>
+          <PlayList/>
+          <PlayList/>
+          <PlayList/>
+      </div> : <h1 style={defaultStyle}>..Loading</h1>
+        }
       </div>
     );
   }
